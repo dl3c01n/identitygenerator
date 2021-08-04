@@ -1,0 +1,23 @@
+{
+  "name": "randomname",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+
+  "scripts": {
+    "postinstall": "link-module-alias",
+    "start": "nodemon server.ts"
+  },
+  "dependencies": {
+    "creditcard-generator": "^0.0.7",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12"
+  },
+  "devDependencies": {
+    "link-module-alias": "^1.2.0"
+  },
+  "_moduleAliases": {
+    "routes": "routes/",
+    "common": "common/"
+  }
+}
