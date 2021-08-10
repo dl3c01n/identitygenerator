@@ -1,6 +1,6 @@
 import { Response } from 'express'
 import * as express from 'express'
-import { con, firstNames, generateCreditCard, generateCvv, generateExpirationDate, lastNames } from '../../common/index'
+import { firstNames, generateCreditCard, generateCvv, generateExpirationDate, lastNames } from '../../common/index'
 const routes = express.Router()
 
 export const firstNameRoute = routes.get('/firstname', (_, res: Response) => {
@@ -32,20 +32,11 @@ export const fullNameRoute = routes.get('/fullname', (_, res: Response) => {
 })
 
 export const identityRoute = routes.get('/identity', async(_, res: Response) => {
-    let cities = []
-    const getCities = await con.connect((err) => {
-        if (err) throw err
-        con.query('SELECT name FROM cities', (err, results) => {
-            if(err) throw err
-            cities = results
-        })
-    })
-    console.log('citi', cities)
     const cc = generateCreditCard()
     const cvv = generateCvv()
     const identity = {
         number: cc,
-        cvv
+        cvv,
     }
     res.status(200).json(identity)
 })
